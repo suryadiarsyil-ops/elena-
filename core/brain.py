@@ -45,6 +45,9 @@ def think(user_input, api_key, model, autonomous=False):
     prompt += f"Environment:\nPWD: {get_pwd()}\nFiles: {list_files()}\n\n"
     prompt += user_input
 
+    # core/brain.py
+    print("[DEBUG] mode: cloud")
+
     response = ask_cloud(prompt, api_key, model)
 
     if len(response) > 50:
