@@ -1,14 +1,14 @@
 # offline.py
 import re
 
-OFFLINE_RULES = [
-    (r"(ls|cd|pwd)", "Itu perintah dasar Linux untuk navigasi direktori."),
-    (r"(python error|traceback)", "Cek baris error terakhir, itu sumber masalah."),
-    (r"(git clone)", "Gunakan: git clone <url> untuk mengambil repo."),
+RULES = [
+    (r"\bls\b", "Gunakan ls untuk melihat isi direktori."),
+    (r"\bcd\b", "Gunakan cd <folder> untuk berpindah."),
+    (r"\bpwd\b", "pwd menunjukkan direktori saat ini."),
 ]
 
-def offline_response(text: str):
-    for pattern, answer in OFFLINE_RULES:
-        if re.search(pattern, text, re.I):
-            return answer
+def offline_response(text):
+    for p, r in RULES:
+        if re.search(p, text, re.I):
+            return r
     return None
