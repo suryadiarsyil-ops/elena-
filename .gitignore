@@ -1,4 +1,10 @@
+# Python runtime
 __pycache__/
 *.pyc
+*.pyo
+
+# Local memory / state
 data/
+
+# Secrets
 .env
