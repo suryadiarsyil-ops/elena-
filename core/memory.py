@@ -28,13 +28,12 @@ def store_memory(text):
     save_memory(mem)
 
 def recall(query):
-    qkeys = set(extract_keywords(query))
+    q = set(extract_keywords(query))
     mem = load_memory()
     scored = []
 
     for m in mem:
-        overlap = qkeys & set(m["keywords"])
-        score = len(overlap)
+        score = len(q & set(m["keywords"]))
         if score > 0:
             scored.append((score, m["text"]))
 
