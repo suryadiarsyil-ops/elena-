@@ -6,8 +6,13 @@ import os
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 def ask_cloud(prompt, api_key, model):
-    if not api_key:
-        return "[ERROR] API key kosong"
+    r = requests.post(...)
+    data = r.json()
+
+    if "choices" not in data:
+        return f"[CLOUD ERROR] {data}"
+
+    return data["choices"][0]["message"]["content"]
 
     headers = {
         "Authorization": f"Bearer {api_key}",
