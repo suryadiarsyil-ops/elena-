@@ -1,5 +1,5 @@
 # openrouter.py
-import requests, json
+import requests
 
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
@@ -12,13 +12,12 @@ def ask_cloud(prompt, api_key, model):
     payload = {
         "model": model,
         "messages": [
-            {"role": "system", "content": "You are ELENA. Be concise."},
+            {"role": "system", "content": "You are ELENA. Be concise and technical."},
             {"role": "user", "content": prompt}
         ],
-        "temperature": 0.7,
+        "temperature": 0.6,
         "max_tokens": 800
     }
 
     r = requests.post(API_URL, headers=headers, json=payload, timeout=30)
-    data = r.json()
-    return data["choices"][0]["message"]["content"]
+    return r.json()["choices"][0]["message"]["content"]
