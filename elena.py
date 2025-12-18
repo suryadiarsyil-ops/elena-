@@ -1,7 +1,7 @@
 
 from core.brain import think
 
-API_KEY = "ISI_API_KEY_LO"
+API_KEY = os.getenv("OPENROUTER_API_KEY")
 MODEL = "deepseek/deepseek-chat"
 
 autonomous = False
