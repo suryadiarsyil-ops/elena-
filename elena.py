@@ -1,10 +1,12 @@
 
+# elena.py
+
+import os
+
 from core.brain import think
 
 API_KEY = os.getenv("OPENROUTER_API_KEY")
-MODEL = "deepseek/deepseek-chat"
-
-autonomous = False
+MODEL = "openai/gpt-3.5-turbo"
 
 print("ELENA AI READY. Commands: /auto /pwd /ls /read <file>")
 
