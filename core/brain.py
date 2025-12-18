@@ -25,14 +25,17 @@ def think(user_input, api_key, model, autonomous=False):
         return read_file(path), "tool"
 
     # AUTONOMOUS MODE
-try:
-    result = execute(t)
-except Exception as e:
-    result = f"[EXEC ERROR] {e}"
-
-output += f"\nStep {i}: {t}\n→ {result}\n"
-        store_memory(output)
-        return output, "autonomous"
+if autonomous:
+    tasks = plan(user_input)
+    output = "Autonomous plan:\n"
+    for i, t in enumerate(tasks, 1):
+        try:
+            result = execute(t)
+        except Exception as e:
+            result = f"[EXEC ERROR] {e}"
+        output += f"\nStep {i}: {t}\n→ {result}\n"
+    store_memory(output)
+    return output, "autonomous"
 
     # NORMAL MODE
     context = recall(user_input)
@@ -47,8 +50,12 @@ output += f"\nStep {i}: {t}\n→ {result}\n"
     prompt += f"Environment:\nPWD: {get_pwd()}\nFiles: {list_files()}\n\n"
     prompt += user_input
 
-    # core/brain.py
     print(f"[DEBUG] mode=cloud | prompt_len={len(prompt)}")
+
+try:
+    response = ask_cloud(prompt, api_key, model)
+except Exception as e:
+    return f"[CLOUD ERROR] {e}", "cloud-error"
     
     response = ask_cloud(prompt, api_key, model)
 
