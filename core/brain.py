@@ -1,4 +1,5 @@
 # core/brain.py
+
 from core.offline import offline_response
 from core.memory import recall, store_memory
 from core.planner import plan
@@ -47,7 +48,6 @@ def think(user_input, api_key, model, autonomous=False):
 
     # core/brain.py
     print("[DEBUG] mode: cloud")
-
     response = ask_cloud(prompt, api_key, model)
 
     if len(response) > 50:
